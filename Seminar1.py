@@ -17,6 +17,15 @@ if __name__ == '__main__':
     positions=fen0.split(" ")[-3]
     startfen=positions+" "+move+" "+" - - 0 0"
     board=chess.Board(startfen)
-    print(startfen)
     print(board)
+
+
+    board.push(chess.Move.from_uci("a2a4"))
+    board.push(chess.Move.from_uci("a4a5"))
+    board.pop()
+    for move in board.legal_moves:
+        board.push(chess.Move.from_uci(str(move)))
+    print(board.fen())
+    print(board)
+
 
