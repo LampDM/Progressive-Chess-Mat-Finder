@@ -2,21 +2,20 @@ import chess
 import sys
 import random
 import time
+from collections import deque
 start = time.time()
 
 if __name__ == '__main__':
     file = open(sys.argv[1], "r")
     fen0 = [line for line in file][0]
-    move=fen0.split(" ")[-2]
     avmoves=int(fen0.split(" ")[-1])
-    positions=fen0.split(" ")[-3]
-    startfen=positions+" "+move+" "+" - - 0 0"
+    startfen=fen0.split(" ")[-3]+" "+fen0.split(" ")[-2]+" "+" - - 0 0"
     board=chess.Board(startfen)
 
     print(startfen)
 
 
-    def first_move(brd, c):
+    def DFS_move(brd, c):
         brd.turn = False
         if c:
             for move in brd.legal_moves:
@@ -27,7 +26,7 @@ if __name__ == '__main__':
                 brd.turn = False
 
                 brd.push(move)
-                first_move(brd,c-1)
+                DFS_move(brd,c-1)
                 brd.pop()
         else:
             # Set white turn
@@ -36,8 +35,30 @@ if __name__ == '__main__':
                 print(brd.fen())
                 print([str(m) for m in brd.move_stack])
 
-    first_move(board,avmoves)
+    #first_move(board,avmoves)
+    # TODO - add Chess detection to BFS
+    def BFS_move(brd, c):
+        nextq = deque([(brd,c)])
+        while nextq:
+            current=nextq.popleft()
+            current[0].turn = False
+            if current[1]==0:
 
+                #print(current[0].fen())
+                #print([str(m) for m in current[0].move_stack])
+                current[0].turn = True
+                #print(len(nextq))
+                if current[0].is_checkmate():
+                    print(current[0].fen())
+                current[0].turn = False
+                continue
+            for move in current[0].legal_moves:
+                current[0].turn = False
+                ccopy=current[0].copy()
+                ccopy.push(move)
+                nextq.append((ccopy, current[1]-1))
+
+    BFS_move(board, avmoves)
 
 end = time.time()
 print(end - start)
