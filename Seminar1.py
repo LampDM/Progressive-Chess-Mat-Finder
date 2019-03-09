@@ -1,10 +1,8 @@
 import chess
 import sys
 import random
-
-
-
-
+import time
+start = time.time()
 
 if __name__ == '__main__':
     file = open(sys.argv[1], "r")
@@ -16,48 +14,29 @@ if __name__ == '__main__':
     board=chess.Board(startfen)
 
     print(startfen)
-    # for move in board.legal_moves:
-    #     print(move)
-    #     board.push(move)
-    #     print(board.fen())
-    #     board = chess.Board(board.fen().replace("w", "b"))
 
-    #     for move2 in board.legal_moves:
-    #         print(move2)
-    #         board.push(move2)
-    #         print(board.fen())
-    #         board.pop()
-    #         board = chess.Board(board.fen().replace("w", "b"))
-    #
-    #     board.pop()
-    #     board = chess.Board(board.fen().replace("w", "b"))
-
-
-    def first_move(brd,c):
-        # Set black turn
+    def first_move(brd, c):
         brd.turn = False
         if c:
             for move in brd.legal_moves:
-                if brd.is_into_check(move) and c!=1:
-                    print("Invalid")
-                    pass
+                brd.turn = True
+                if brd.is_check():
+                    brd.turn = False
+                    break
+                brd.turn = False
+
                 brd.push(move)
-
                 first_move(brd,c-1)
-
-
                 brd.pop()
-
-
         else:
             # Set white turn
             brd.turn = True
             if brd.is_checkmate():
                 print(brd.fen())
+                print([str(m) for m in brd.move_stack])
+
+    first_move(board,4)
 
 
-
-    first_move(board,avmoves)
-
-
-
+end = time.time()
+print(end - start)
