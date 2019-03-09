@@ -1,31 +1,63 @@
 import chess
 import sys
+import random
 
-board = chess.Board()
 
-#TODO play with library
-print(board.push_san("a3"))
 
-print([i for i in board.legal_moves])
+
 
 if __name__ == '__main__':
     file = open(sys.argv[1], "r")
     fen0 = [line for line in file][0]
-    print(fen0)
     move=fen0.split(" ")[-2]
-    avmoves=fen0.split(" ")[-1]
+    avmoves=int(fen0.split(" ")[-1])
     positions=fen0.split(" ")[-3]
     startfen=positions+" "+move+" "+" - - 0 0"
     board=chess.Board(startfen)
-    print(board)
+
+    print(startfen)
+    # for move in board.legal_moves:
+    #     print(move)
+    #     board.push(move)
+    #     print(board.fen())
+    #     board = chess.Board(board.fen().replace("w", "b"))
+
+    #     for move2 in board.legal_moves:
+    #         print(move2)
+    #         board.push(move2)
+    #         print(board.fen())
+    #         board.pop()
+    #         board = chess.Board(board.fen().replace("w", "b"))
+    #
+    #     board.pop()
+    #     board = chess.Board(board.fen().replace("w", "b"))
 
 
-    board.push(chess.Move.from_uci("a2a4"))
-    board.push(chess.Move.from_uci("a4a5"))
-    board.pop()
-    for move in board.legal_moves:
-        board.push(chess.Move.from_uci(str(move)))
-    print(board.fen())
-    print(board)
+    def first_move(brd,c):
+        # Set black turn
+        brd.turn = False
+        if c:
+            for move in brd.legal_moves:
+                if brd.is_into_check(move) and c!=1:
+                    print("Invalid")
+                    pass
+                brd.push(move)
+
+                first_move(brd,c-1)
+
+
+                brd.pop()
+
+
+        else:
+            # Set white turn
+            brd.turn = True
+            if brd.is_checkmate():
+                print(brd.fen())
+
+
+
+    first_move(board,avmoves)
+
 
 
