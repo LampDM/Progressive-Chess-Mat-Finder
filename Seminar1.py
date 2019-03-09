@@ -15,6 +15,7 @@ if __name__ == '__main__':
 
     print(startfen)
 
+
     def first_move(brd, c):
         brd.turn = False
         if c:
@@ -35,7 +36,7 @@ if __name__ == '__main__':
                 print(brd.fen())
                 print([str(m) for m in brd.move_stack])
 
-    first_move(board,4)
+    first_move(board,avmoves)
 
 
 end = time.time()
