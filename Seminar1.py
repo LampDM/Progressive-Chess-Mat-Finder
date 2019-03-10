@@ -3,6 +3,7 @@ import sys
 import random
 import time
 from collections import deque
+import operator
 start = time.time()
 
 if __name__ == '__main__':
@@ -35,30 +36,54 @@ if __name__ == '__main__':
                 print(brd.fen())
                 print([str(m) for m in brd.move_stack])
 
-    #first_move(board,avmoves)
-    # TODO - add Chess detection to BFS
-    def BFS_move(brd, c):
-        nextq = deque([(brd,c)])
-        while nextq:
-            current=nextq.popleft()
-            current[0].turn = False
-            if current[1]==0:
 
-                #print(current[0].fen())
-                #print([str(m) for m in current[0].move_stack])
+    def rate(move,current):
+        score=1000+random.randint(1,10)
+        avmovs=current[1]
+        board=current[0]
+        if board.is_capture(move):
+            score-=500
+        if board.is_irreversible(move):
+            score -= 20
+
+        return score
+
+
+    def BFS_move(brd, c):
+        nextq = deque([(brd, c)])
+        while nextq:
+            current = nextq.popleft()
+            current[0].turn = False
+            if current[1] == 0:
                 current[0].turn = True
-                #print(len(nextq))
                 if current[0].is_checkmate():
                     print(current[0].fen())
+                    print([str(m) for m in current[0].move_stack])
                 current[0].turn = False
                 continue
-            for move in current[0].legal_moves:
+
+            n_legal_moves = [(move, rate(move, current)) for move in current[0].legal_moves]
+            n_legal_moves.sort(key = operator.itemgetter(1))
+
+            for move,r in n_legal_moves:
                 current[0].turn = False
-                ccopy=current[0].copy()
+                sc = current[1]
+                ccopy = current[0].copy()
                 ccopy.push(move)
+                ccopy.turn = False
+
+                # Eliminate premature attacks on the king - Chess
+                if sc > 1 and ccopy.was_into_check():
+                    continue
+                # Eliminate last moves that don't attack the king - Chess
+                if sc == 1 and not ccopy.was_into_check():
+                    continue
+
                 nextq.append((ccopy, current[1]-1))
 
-    BFS_move(board, avmoves)
 
+
+    BFS_move(board, avmoves)
+    #DFS_move(board,avmoves)
 end = time.time()
 print(end - start)
