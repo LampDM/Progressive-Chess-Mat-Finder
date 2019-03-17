@@ -13,13 +13,6 @@ if __name__ == '__main__':
 
     #print(startfen)
 
-    def islastTurnCheck(move,current):
-        current[0].push(move)
-        current[0].turn = True
-        rez= current[0].is_check()
-        current[0].turn = False
-        return rez and current[1] == 1
-
     def rate(move,current):
         score=1000 + random.randint(1,10)
         avmovs=current[1]
@@ -33,20 +26,18 @@ if __name__ == '__main__':
             score -= 20
 
         # Reward Manhattan distance to the King
-        ms = move.uci()[:2]
-        # Name of file
-        kf = chess.square_file(board.king(True))
-        mf = int([a for a in range(len(chess.FILE_NAMES)) if chess.FILE_NAMES[a] == ms[0]][0])
+            ms = move.uci()[:2]
+            # Name of file
+            kf = chess.square_file(board.king(True))
+            mf = int([a for a in range(len(chess.FILE_NAMES)) if chess.FILE_NAMES[a] == ms[0]][0])
 
-        # Number of rank
-        kr = chess.square_rank(board.king(True))
-        mr = int(ms[1])-1
-
-        md = abs(kf-mf)+abs(kr-mr)
-        score+= md * 100
+            # Number of rank
+            kr = chess.square_rank(board.king(True))
+            mr = int(ms[1])-1
+            md = abs(kf-mf)+abs(kr-mr)
+            score+= md * 100
 
         return score
-
 
     def BFS_move(brd, c):
         nextq = deque([(brd, c, 0)])
@@ -85,6 +76,9 @@ if __name__ == '__main__':
                 # Reward last turn attacks on the king
                 if sc == 1 and ccopy.was_into_check():
                     r -= 1000
+                # Keep the king from being captured
+                if ccopy.king(True) is None:
+                    continue
                 nextq.append((ccopy, current[1]-1, r))
 
     BFS_move(board, avmoves)
