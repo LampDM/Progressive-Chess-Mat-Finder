@@ -11,7 +11,7 @@ if __name__ == '__main__':
     startfen=fen0.split(" ")[-3]+" "+fen0.split(" ")[-2]+" "+" - - 0 0"
     board=chess.Board(startfen)
 
-    #print(startfen)
+    print(startfen)
 
     def rate(move,current):
         score=1000 + random.randint(1,10)
@@ -49,7 +49,7 @@ if __name__ == '__main__':
             if current[1] == 0:
                 current[0].turn = True
                 if current[0].is_checkmate():
-                    #print(current[0].fen())
+                    print(current[0].fen())
                     sstr=""
                     moveslist=[str(m) for m in current[0].move_stack]
                     for move in moveslist:
@@ -85,4 +85,4 @@ if __name__ == '__main__':
 
 
 end = time.time()
-#print(end - start)
+print(end - start)
