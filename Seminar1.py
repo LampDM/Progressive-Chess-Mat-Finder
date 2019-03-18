@@ -11,7 +11,14 @@ if __name__ == '__main__':
     startfen=fen0.split(" ")[-3]+" "+fen0.split(" ")[-2]+" "+" - - 0 0"
     board=chess.Board(startfen)
 
-    print(startfen)
+    # Check who plays black or white
+    color=fen0.split(" ")[1]
+    moveside = False
+    if color == "w":
+        moveside = True
+    enemyside = not moveside
+
+    #print(startfen)
 
     def rate(move,current):
         score=1000 + random.randint(1,10)
@@ -28,11 +35,11 @@ if __name__ == '__main__':
         # Reward Manhattan distance to the King
             ms = move.uci()[:2]
             # Name of file
-            kf = chess.square_file(board.king(True))
+            kf = chess.square_file(board.king(enemyside))
             mf = int([a for a in range(len(chess.FILE_NAMES)) if chess.FILE_NAMES[a] == ms[0]][0])
 
             # Number of rank
-            kr = chess.square_rank(board.king(True))
+            kr = chess.square_rank(board.king(enemyside))
             mr = int(ms[1])-1
             md = abs(kf-mf)+abs(kr-mr)
             score+= md * 100
@@ -45,44 +52,46 @@ if __name__ == '__main__':
             #print(len(nextq))
             nextq = deque(sorted(list(nextq), key=lambda x: x[2]))
             current = nextq.popleft()
-            current[0].turn = False
+            current[0].turn = moveside
             if current[1] == 0:
-                current[0].turn = True
+                current[0].turn = enemyside
                 if current[0].is_checkmate():
-                    print(current[0].fen())
+                    #print(current[0].fen())
                     sstr=""
                     moveslist=[str(m) for m in current[0].move_stack]
                     for move in moveslist:
                         sstr+=move[:2]+"-"+move[2:]+";"
                     print(sstr[:-1])
                     break
-                current[0].turn = False
+                current[0].turn = moveside
                 continue
 
             for move in current[0].legal_moves:
                 r = rate(move, current)
-                current[0].turn = False
+                current[0].turn = moveside
                 sc = current[1]
                 ccopy = current[0].copy()
                 ccopy.push(move)
-                ccopy.turn = False
+                ccopy.turn = moveside
 
-                # Eliminate premature attacks on the king - Chess
+                # Eliminate premature attacks on the king
                 if sc > 1 and ccopy.was_into_check():
                     continue
-                # Eliminate last moves that don't attack the king - Chess
+                # Eliminate last moves that don't attack the king
                 if sc == 1 and not ccopy.was_into_check():
                     continue
                 # Reward last turn attacks on the king
                 if sc == 1 and ccopy.was_into_check():
                     r -= 1000
                 # Keep the king from being captured
-                if ccopy.king(True) is None:
+                if ccopy.king(enemyside) is None:
                     continue
+                # Keep the black king from stepping into check
+
                 nextq.append((ccopy, current[1]-1, r))
 
     BFS_move(board, avmoves)
 
 
 end = time.time()
-print(end - start)
+#print(end - start)
