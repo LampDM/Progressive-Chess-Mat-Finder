@@ -21,6 +21,14 @@ if __name__ == '__main__':
 
     #print(startfen)
 
+    def KSCoverage(board, kingpos):
+        points = 0
+        ksquares = [ a for a in board.attacks(kingpos)]
+        for a in ksquares:
+            if board.is_attacked_by(moveside,a):
+                points -= 100 * len(board.attackers(moveside,a))
+        return points
+
     def rate(move,current):
         score=1000 #+ random.randint(1,10)
         avmovs=current[1]
@@ -48,8 +56,6 @@ if __name__ == '__main__':
         return score
 
     def BFS_move(brd, c):
-
-
 
         nextq = deque([(brd, c, 0)])
         while nextq:
@@ -95,7 +101,11 @@ if __name__ == '__main__':
                 # Keep the king from being captured
                 if ccopy.king(enemyside) is None:
                     continue
-                # Keep the black king from stepping into check
+
+                # Apply after move heuristics to score
+
+                # Coverage of squares around the King
+                r += KSCoverage(ccopy, board.king(enemyside))
 
                 nextq.append((ccopy, current[1]-1, r))
 
@@ -103,4 +113,4 @@ if __name__ == '__main__':
 
 
 end = time.time()
-#print(end - start)
+#(end - start)
