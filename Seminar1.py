@@ -2,7 +2,8 @@ import chess
 import sys
 import random
 import time
-from collections import deque
+import heapq
+
 start = time.time()
 if __name__ == '__main__':
     file = open(sys.argv[1], "r")
@@ -23,7 +24,7 @@ if __name__ == '__main__':
 
     def KSCoverage(board, kingpos):
         points = 0
-        ksquares = [ a for a in board.attacks(kingpos)]
+        ksquares = [a for a in board.attacks(kingpos)]
         for a in ksquares:
             if board.is_attacked_by(moveside,a):
                 points -= 100 * len(board.attackers(moveside,a))
@@ -32,7 +33,7 @@ if __name__ == '__main__':
     def rate(move,current):
         score=1000 #+ random.randint(1,10)
         avmovs=current[1]
-        board=current[0]
+        board=current[3]
 
         # If move is a capture reward it
         #if board.is_capture(move):
@@ -57,60 +58,73 @@ if __name__ == '__main__':
 
     def BFS_move(brd, c):
 
-        nextq = deque([(brd, c, 0)])
+        #nextq = deque([(brd, c, 0)])
+        nextq = [(0, c, id(brd),brd)]
+        heapq.heapify(nextq)
         while nextq:
-            if (float(time.time()) - float(start)) > 20:
-                #print("Took to long " + str((float(time.time()) - float(start))))
+            #if (float(time.time()) - float(start)) > 20:
+                #print("Took to long 20+")
                 #break
-                pass
+                #pass
 
-            #print(len(nextq))
-            nextq = deque(sorted(list(nextq), key=lambda x: x[2]))
-            current = nextq.popleft()
-            current[0].turn = moveside
+            #nextq = deque(sorted(list(nextq), key=lambda x: x[2]))
+
+            current = heapq.heappop(nextq)
+            current[3].turn = moveside
+
+            # Check if the given position is a checkmate
             if current[1] == 0:
-                current[0].turn = enemyside
-                if current[0].is_checkmate():
-                    #print(current[0].fen())
+                current[3].turn = enemyside
+                if current[3].is_checkmate():
+                    #print(current[3].fen())
                     sstr=""
-                    moveslist=[str(m) for m in current[0].move_stack]
+                    moveslist=[str(m) for m in current[3].move_stack]
                     for move in moveslist:
                         sstr+=move[:2]+"-"+move[2:]+";"
                     print(sstr[:-1])
                     break
-                current[0].turn = moveside
+                current[3].turn = moveside
                 continue
 
-            for move in current[0].legal_moves:
+            # The main loop
+            for move in current[3].legal_moves:
                 r = rate(move, current)
-                current[0].turn = moveside
+                current[3].turn = moveside
                 sc = current[1]
-                ccopy = current[0].copy()
-                ccopy.push(move)
-                ccopy.turn = moveside
+
+                current[3].push(move)
+                current[3].turn = moveside
 
                 # Eliminate premature attacks on the king
-                if sc > 1 and ccopy.was_into_check():
+                if sc > 1 and current[3].was_into_check():
+                    current[3].pop()
                     continue
                 # Eliminate last moves that don't attack the king
-                if sc == 1 and not ccopy.was_into_check():
+                if sc == 1 and not current[3].was_into_check():
+                    current[3].pop()
                     continue
                 # Reward last turn attacks on the king
-                if sc == 1 and ccopy.was_into_check():
+                if sc == 1 and current[3].was_into_check():
                     r -= 1000
                 # Keep the king from being captured
-                if ccopy.king(enemyside) is None:
+                if current[3].king(enemyside) is None:
+                    current[3].pop()
                     continue
 
                 # Apply after move heuristics to score
 
                 # Coverage of squares around the King
-                r += KSCoverage(ccopy, board.king(enemyside))
 
-                nextq.append((ccopy, current[1]-1, r))
+                r += KSCoverage(current[3], board.king(enemyside))
+
+                ccopy = current[3].copy()
+                current[3].pop()
+                heapq.heappush(nextq, (r,current[1]-1,id(ccopy),ccopy))
+                #nextq.append((ccopy, current[1]-1, r))
+
 
     BFS_move(board, avmoves)
 
 
 end = time.time()
-#(end - start)
+#print(end - start)
