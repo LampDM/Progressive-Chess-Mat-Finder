@@ -58,7 +58,7 @@ if __name__ == '__main__':
 
     def BFS_move(brd, c):
 
-        #nextq = deque([(brd, c, 0)])
+        visited = set()
         nextq = [(0, c, id(brd),brd)]
         heapq.heapify(nextq)
         while nextq:
@@ -67,10 +67,10 @@ if __name__ == '__main__':
                 #break
                 #pass
 
-            #nextq = deque(sorted(list(nextq), key=lambda x: x[2]))
-
             current = heapq.heappop(nextq)
             current[3].turn = moveside
+
+            visited.add(current[3].__str__())
 
             # Check if the given position is a checkmate
             if current[1] == 0:
@@ -94,6 +94,9 @@ if __name__ == '__main__':
 
                 current[3].push(move)
                 current[3].turn = moveside
+                if current[3].__str__() in visited:
+                    current[3].pop()
+                    continue
 
                 # Eliminate premature attacks on the king
                 if sc > 1 and current[3].was_into_check():
@@ -119,8 +122,8 @@ if __name__ == '__main__':
 
                 ccopy = current[3].copy()
                 current[3].pop()
+
                 heapq.heappush(nextq, (r,current[1]-1,id(ccopy),ccopy))
-                #nextq.append((ccopy, current[1]-1, r))
 
 
     BFS_move(board, avmoves)
