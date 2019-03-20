@@ -62,7 +62,7 @@ def profilefun():
             #For pieces from knight to Queen - no pawns
             for i in range(2,7):
                 for p in board.pieces(i, moveside):
-                    points += Man_dist(p, kingpos)
+                    points += min([Man_dist(p, ksq) for ksq in board.attacks(kingpos)])
 
             return points * 100
 
@@ -73,6 +73,8 @@ def profilefun():
             heapq.heapify(nextq)
             while nextq:
 
+                if (time.time()-start) > 20:
+                    break
                 current = heapq.heappop(nextq)
                 current[3].turn = moveside
 
@@ -119,7 +121,11 @@ def profilefun():
                         current[3].pop()
                         continue
 
-                    r = 1000
+                    # Desperate measures
+                    rand = 0
+                    if (time.time() - start) > 17:
+                        rand = random.randint(1,20)
+                    r = 1000 + rand
 
                     # Reward last turn attacks on the king
                     if sc == 1 and current[3].was_into_check():
@@ -129,7 +135,7 @@ def profilefun():
 
                     # Coverage of squares around the King
                     r -= KSCoverage(current[3],board.king(enemyside))
-                    # Manhattan distance from all non pawn figures to the King's quadrant
+                    # Manhattan distance from all non pawn figures to the King
                     r += Manhattan(current[3],board.king(enemyside))
 
                     ccopy = current[3].copy()
