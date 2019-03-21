@@ -3,6 +3,7 @@ import sys
 import random
 import time
 import heapq
+from chess.polyglot import zobrist_hash
 
 
 import cProfile, pstats, io
@@ -60,26 +61,31 @@ def profilefun():
             points = 0
 
             #For pieces from knight to Queen - no pawns
-            for i in range(2,7):
+            for i in range(2, 7):
                 for p in board.pieces(i, moveside):
-                    points += min([Man_dist(p, ksq) for ksq in board.attacks(kingpos)])
+                    #points += min([Man_dist(p, ksq) for ksq in board.attacks(kingpos)])
+                    points += Man_dist(p, kingpos)-1
 
             return points * 100
 
-        def BFS_move(brd, c):
+        def ManhattanLight(move,kingpos):
+            return 100 * (Man_dist(move.to_square, kingpos)-1)
 
+        def BFS_move(brd, c):
+            movesdict = dict()
             visited = set()
             nextq = [(0, c, id(brd),brd)]
             heapq.heapify(nextq)
             while nextq:
 
-                if (time.time()-start) > 20:
+                if (time.time()-start) > 30:
                     break
                 current = heapq.heappop(nextq)
                 current[3].turn = moveside
 
-                visited.add(current[3].__str__())
-
+                #visited.add("%s%d" % (current[3].__str__(), 3))
+                zh = zobrist_hash(current[3])
+                visited.add(zh)
                 # Check if the given position is a checkmate
                 if current[1] == 0:
                     current[3].turn = enemyside
@@ -103,11 +109,6 @@ def profilefun():
                     current[3].push(move)
                     current[3].turn = moveside
 
-                    # Check if we already saw this board before
-                    if current[3].__str__() in visited:
-                        current[3].pop()
-                        continue
-
                     # Eliminate premature attacks on the king
                     if sc > 1 and current[3].was_into_check():
                         current[3].pop()
@@ -121,10 +122,16 @@ def profilefun():
                         current[3].pop()
                         continue
 
+                    # Check if we already saw this board before
+                    zh = zobrist_hash(current[3])
+                    if zh in visited:
+                        current[3].pop()
+                        continue
+
                     # Desperate measures
                     rand = 0
                     if (time.time() - start) > 17:
-                        rand = random.randint(1,20)
+                        rand = random.randint(1, 20)
                     r = 1000 + rand
 
                     # Reward last turn attacks on the king
@@ -137,17 +144,18 @@ def profilefun():
                     r -= KSCoverage(current[3],board.king(enemyside))
                     # Manhattan distance from all non pawn figures to the King
                     r += Manhattan(current[3],board.king(enemyside))
+                    #r += ManhattanLight(move, board.king(enemyside))
 
                     ccopy = current[3].copy()
                     current[3].pop()
 
                     heapq.heappush(nextq, (r,current[1]-1,id(ccopy),ccopy))
 
-
         BFS_move(board, avmoves)
 
     end = time.time()
     #print(end - start)
+
 
 profilefun()
 
