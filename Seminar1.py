@@ -85,7 +85,7 @@ def profilefun():
 
                 #visited.add("%s%d" % (current[3].__str__(), 3))
                 zh = zobrist_hash(current[3])
-                visited.add(zh)
+                visited.add(zh+current[1])
                 # Check if the given position is a checkmate
                 if current[1] == 0:
                     current[3].turn = enemyside
@@ -124,15 +124,26 @@ def profilefun():
 
                     # Check if we already saw this board before
                     zh = zobrist_hash(current[3])
-                    if zh in visited:
+                    if zh+sc-1 in visited:
                         current[3].pop()
                         continue
+
+                    r = 0
+                    # Reward promotions
+                    prom = move.promotion
+                    if prom is not None:
+                        r-= -200
+                        if prom == chess.Piece(5,moveside):
+                            r -= 300
+                        if prom == chess.Piece(4, moveside):
+                            r -= 200
+
 
                     # Desperate measures
                     rand = 0
                     if (time.time() - start) > 17:
                         rand = random.randint(1, 20)
-                    r = 1000 + rand
+                    r =+ 1000 + rand
 
                     # Reward last turn attacks on the king
                     if sc == 1 and current[3].was_into_check():
@@ -143,8 +154,9 @@ def profilefun():
                     # Coverage of squares around the King
                     r -= KSCoverage(current[3],board.king(enemyside))
                     # Manhattan distance from all non pawn figures to the King
-                    r += Manhattan(current[3],board.king(enemyside))
-                    #r += ManhattanLight(move, board.king(enemyside))
+                    #if (time.time() - start) < 8:
+                        #r += Manhattan(current[3], board.king(enemyside))
+                    r += ManhattanLight(move, board.king(enemyside))
 
                     ccopy = current[3].copy()
                     current[3].pop()
