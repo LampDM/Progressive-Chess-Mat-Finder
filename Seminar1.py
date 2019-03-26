@@ -85,7 +85,7 @@ def profilefun():
 
                 #visited.add("%s%d" % (current[3].__str__(), 3))
                 zh = zobrist_hash(current[3])
-                visited.add(zh+current[1])
+                visited.add(zh ^ current[1])
                 # Check if the given position is a checkmate
                 if current[1] == 0:
                     current[3].turn = enemyside
@@ -124,7 +124,7 @@ def profilefun():
 
                     # Check if we already saw this board before
                     zh = zobrist_hash(current[3])
-                    if zh+sc-1 in visited:
+                    if zh ^ (sc-1) in visited:
                         current[3].pop()
                         continue
 
@@ -154,9 +154,11 @@ def profilefun():
                     # Coverage of squares around the King
                     r -= KSCoverage(current[3],board.king(enemyside))
                     # Manhattan distance from all non pawn figures to the King
-                    #if (time.time() - start) < 8:
-                        #r += Manhattan(current[3], board.king(enemyside))
+                    #r += Manhattan(current[3], board.king(enemyside))
                     r += ManhattanLight(move, board.king(enemyside))
+
+                    #Number of moves
+                    r -= (current[1]-1)*100
 
                     ccopy = current[3].copy()
                     current[3].pop()
@@ -166,7 +168,7 @@ def profilefun():
         BFS_move(board, avmoves)
 
     end = time.time()
-    #print(end - start)
+    print(end - start)
 
 
 profilefun()
