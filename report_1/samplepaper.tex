@@ -1,3 +1,38 @@
+
+\documentclass[runningheads]{llncs}
+\usepackage{graphicx}
+\usepackage{apacite}
+\usepackage{float}
+\usepackage{listings}
+\begin{document}
+
+\title{Seminarska naloga 1}
+\subtitle{Iskanje šah matov pri 1-2-3 šahu}
+
+\author{Danijel Maraž}
+
+
+\institute{Fakulteta za Računalništvo in Informatiko UL
+\email{dm9929@student.uni-lj.si}\\
+}
+
+\maketitle             
+
+\begin{abstract}
+The article covers the work done in the scope of the first seminar assignment as part of the subject Algorithms. 
+
+\keywords{A* BFS Progressive Chess Heuristics Pathfinding}
+\end{abstract}
+
+\section{Uvod}
+Pri seminarski nalogi nam je bil dan cilj implementiranja algoritma A* (A zvezda) v namen iskanja
+potez, ki vodijo do šah mata pri dani postavitvi šahovskih figur. Kot jezik implementacije sem si izbral Python, ker menim, da se z njim da pisati lepšo in bolj berljivo kodo. Iz drugega vidika pa je tudi bistveno počasnejši od Jave. Če bi torej program pisal za trg bi ga zagotovo s pomočjo jezika, ki se hitreje izvaja. 
+
+\section{Struktura programa}
+
+
+
+\begin{lstlisting}
 import chess
 import sys
 import random
@@ -135,3 +170,16 @@ def FCM():
 FCM()
 
 
+
+\end{lstlisting}
+
+\section{Hevristike}
+
+\section{Ovrednotev}
+
+ \bibliographystyle{apacite}
+ 
+ \bibliography{references}
+
+
+\end{document}
