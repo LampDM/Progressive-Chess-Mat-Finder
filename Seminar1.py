@@ -68,25 +68,16 @@ def FCM():
                 # The main loop
                 for move in current[3].legal_moves:
 
-                    current[3].turn = moveside
                     sc = current[1]
 
                     current[3].push(move)
                     current[3].turn = moveside
 
-                    # Eliminate premature attacks on the king
-                    if sc > 1 and current[3].was_into_check():
+                    # Eliminate premature attacks on the king + eliminate last moves that don't attack the king
+                    wic = current[3].was_into_check()
+                    if (sc > 1 and wic) or (sc == 1 and not wic):
                         current[3].pop()
                         continue
-                    # Eliminate last moves that don't attack the king
-                    if sc == 1 and not current[3].was_into_check():
-                        current[3].pop()
-                        continue
-                    # Keep the king from being captured
-                    #if current[3].king(enemyside) is None:
-                        #print("king capture keeping")
-                        #current[3].pop()
-                        #continue
 
                     # Check if we already saw this board before
                     zh = zobrist_hash(current[3])
@@ -99,36 +90,35 @@ def FCM():
                     prom = move.promotion
                     if prom is not None:
                         r -= -200
-                        if prom == chess.Piece(5,moveside):
+                        if prom == chess.Piece(5, moveside):
                             r -= 300
                         if prom == chess.Piece(4, moveside):
                             r -= 200
 
 
                     # Desperate measures
-                    rand = 0
                     if (time.time() - start) > 17:
                         rand = random.randint(1, 20)
-                    r =+ rand
+                        r += rand
 
                     # Reward last turn attacks on the king
-                    if sc == 1 and current[3].was_into_check():
+                    if sc == 1 and wic:
                         r -= 1000
 
                     # Apply various heuristics
 
                     # Coverage of squares around the King
-                    r -= KSCoverage(current[3],board.king(enemyside))
+                    r -= KSCoverage(current[3], board.king(enemyside))
                     # Manhattan distance from all non pawn figures to the King
                     r += ManhattanLight(move, board.king(enemyside))
 
                     # Reward depth
-                    r -= (current[1]-1)*100
+                    r -= (sc-1)*100
 
                     ccopy = current[3].copy()
                     current[3].pop()
 
-                    heapq.heappush(nextq, (r,current[1]-1,id(ccopy),ccopy))
+                    heapq.heappush(nextq, (r, sc-1, id(ccopy), ccopy))
 
         BFS_move(board, avmoves)
 
