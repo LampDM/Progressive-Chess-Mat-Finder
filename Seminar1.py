@@ -102,7 +102,7 @@ def FCM():
                         r += rand
 
                     # Reward last turn attacks on the king
-                    if sc == 1 and wic:
+                    if sc == 1:
                         r -= 1000
 
                     # Apply various heuristics
