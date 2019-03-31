@@ -130,18 +130,180 @@ Spremenljivka \textit{r} hrani točke pri ocenjevanju nove šahovnice. Nad njo s
 
 \subsection{Promocije}
 Promocije figur, ki so bistven del igre 1-2-3 šaha se nagrajuje z -200 točkami. Iz izkušenj igranja 1-2-3 šaha vem, da sta najpogostejši figuri pri promocijah kraljica in trdnjava. Zato zanju program prejme dodatnih -300 in -200 točk.
+\\
 \subsection{Naključnost}
 Če čas izvajanja programa preseže 17 sekund se vsaki novi šahovnici doda naključno število točk med 0 in 20. S tem programu omogočimo večjo dinamičnost pri izbiri naslednje šahovnice in nam naključna srečna izbira lahko drastično izboljša rezultate.
+\\
 \subsection{Nagrajevanje dosega končne poteze}
-Izkazalo se je, da je najboljše program prisiliti k takojšnjemu pregledu šahovnic, ki nimajo 
-\subsection{Pokritost polj kralja}
-\subsection{Manhattan razdalja}
+Izkazalo se je, da je najboljše program prisiliti k takojšnjemu pregledu šahovnic, ki nimajo več na voljo potez zato tem prištejemo -1000 točk.
+\\
+\subsection{Pokritost matnega kvadrata}
+\begin{lstlisting}
+def KSCoverage(board, kingpos):
+    return 100 * sum([len(board.attackers(moveside, a)) for a in
+                      board.attacks(kingpos)
+                      if board.is_attacked_by(moveside, a)])
+\end{lstlisting}
+Funkcija ugotovi koliko polj matnega kvadrata je že pokritih (napadenih) in za vsako prišteje -100 točk. Pri štetju pokritosti nasprotnikove figure zanemari in dodeli točke za dvojno pokritje polj saj je to bistven del mnogih šah matov. Izkazalo se je, da je ta hevristika najbolj učinkovita, ker zelo lepo opisuje definicijo šah mata. Ob njenem dodatku je program lahko rešil kar 7 dodatnih primerov \cite{janko2015razvoj}. 
+\\
+
+\subsection{Manhattanska razdalja}
+\begin{lstlisting}
+def Man_dist(sq1, sq2):
+    return abs(chess.square_file(sq1) - chess.square_file(sq2)) + abs(
+        chess.square_rank(sq1) - chess.square_rank(sq2))
+
+
+def ManhattanLight(move, kingpos):
+    return 100 * (Man_dist(move.to_square, kingpos) - 1)
+\end{lstlisting}
+Funkcija za vsako polje Manhattanske razdalje prišteje 100 točk šahovnici. Podobno kot prejšnja hevristika je tudi ta precej nepogrešljiva. Deluje, ker figure prisili k premiku proti matnemu kvadratu. Kljub temu ima svoje pomankljivosti. Predvsem to, da je operacija računanja Manhattanske razdlje od vseh figur do matnega kvadrata precej potratna. Posledično sem se odločil implementirati manj zahtevno verzijo razdalje, ki se izračuna samo za figuro, ki je bila premaknjena in sicer od njene nove pozicije do matnega kvadrata. S tem smo program pohitrili kar nam je pri mnogih primerih prineslo boljše rezultate \cite{janko2015razvoj}.
+\\
 \subsection{Nagrajevanje globine}
+Za vsak nivo dosežene globine se oceni prišteje -100 točk. Hevristika je precej uporabna in nam je v mnogih primerih izboljšala rezultate saj program prisili k sledenju boljše ocenjenih globjih šahovnic.
 
 \section{Ovrednotev}
+\begin{center}
+ \begin{tabular}{||c c c c||} 
+ \hline
+ Col1 & Col2 & Col2 & Col3 \\ [0.5ex] 
+ \hline\hline
+ 1 & 6 & 87837 & 787 \\ 
+ \hline
+ 2 & 7 & 78 & 5415 \\
+ \hline
+ 3 & 545 & 778 & 7507 \\
+ \hline
+ 4 & 545 & 18744 & 7560 \\
+ \hline
+ 5 & 88 & 788 & 6344 \\ [1ex] 
+ \hline
+\end{tabular}
+\end{center}
 
 \section{Programska koda}
+\begin{lstlisting}
+import chess
+import sys
+import random
+import heapq
+import time
+from chess.polyglot import zobrist_hash
 
+start = time.time()
+
+file = open(sys.argv[1], "r")
+fen0 = [line for line in file][0]
+fen0s = fen0.split(" ")
+avmoves = int(fen0.split(" ")[-1])
+startfen = fen0s[-3] + " " + fen0s[-2] + " " + " - - 0 0"
+board = chess.Board(startfen)
+
+# Check who plays black or white
+color = fen0s[1]
+moveside = False
+if color == "w":
+    moveside = True
+enemyside = not moveside
+
+
+def KSCoverage(board, kingpos):
+    return 100 * sum([len(board.attackers(moveside, a)) for a in
+                      board.attacks(kingpos)
+                      if board.is_attacked_by(moveside, a)])
+
+
+def Man_dist(sq1, sq2):
+    return abs(chess.square_file(sq1) - chess.square_file(sq2)) + abs(
+        chess.square_rank(sq1) - chess.square_rank(sq2))
+
+
+def ManhattanLight(move, kingpos):
+    return 100 * (Man_dist(move.to_square, kingpos) - 1)
+
+
+def BFS_move(brd, c):
+    visited = set()
+    nextq = [(0, c, id(brd), brd)]
+    heapq.heapify(nextq)
+    while nextq:
+
+        current = heapq.heappop(nextq)
+        current[3].turn = moveside
+
+        zh = zobrist_hash(current[3])
+        visited.add(zh - current[1])
+        # Check if the given position is a checkmate
+        if current[1] == 0:
+            current[3].turn = enemyside
+            if current[3].is_checkmate():
+                sstr = ""
+                moveslist = [str(m) for m in current[3].move_stack]
+                for move in moveslist:
+                    sstr += move[:2] + "-" + move[2:] + ";"
+                print(sstr[:-1])
+                break
+            current[3].turn = moveside
+            continue
+
+        # The main loop
+        for move in current[3].legal_moves:
+
+            sc = current[1]
+
+            current[3].push(move)
+            current[3].turn = moveside
+
+            # Eliminate premature attacks on the king + eliminate last moves that don't attack the king
+            wic = current[3].was_into_check()
+            if (sc > 1 and wic) or (sc == 1 and not wic):
+                current[3].pop()
+                continue
+
+            # Check if we already saw this board before
+            zh = zobrist_hash(current[3])
+            if zh - (sc - 1) in visited:
+                current[3].pop()
+                continue
+
+            r = 0
+            # Reward promotions
+            prom = move.promotion
+            if prom is not None:
+                r -= -200
+                if prom == chess.Piece(5, moveside):
+                    r -= 300
+                if prom == chess.Piece(4, moveside):
+                    r -= 200
+
+            # Desperate measures
+            if (time.time() - start) > 17:
+                rand = random.randint(1, 20)
+                r += rand
+
+            # Reward last turn attacks on the king
+            if sc == 1:
+                r -= 1000
+
+            # Apply various heuristics
+
+            # Coverage of squares around the King
+            r -= KSCoverage(current[3], board.king(enemyside))
+            # Manhattan distance from all non pawn figures to the King
+            r += ManhattanLight(move, board.king(enemyside))
+
+            # Reward depth
+            r -= (sc - 1) * 100
+
+            ccopy = current[3].copy()
+            current[3].pop()
+
+            heapq.heappush(nextq, (r, sc - 1, id(ccopy), ccopy))
+
+
+BFS_move(board, avmoves)
+
+\end{lstlisting}
  \bibliographystyle{apacite}
  
  \bibliography{references}

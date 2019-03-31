@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.12.18)  30 MAR 2019 19:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.12.18)  31 MAR 2019 10:02
 entering extended mode
 **./samplepaper.tex
 (samplepaper.tex
@@ -340,44 +340,135 @@ Overfull \hbox (36.88037pt too wide) in paragraph at lines 125--126
 [][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-(samplepaper.bbl
-Underfull \hbox (badness 3849) in paragraph at lines 14--26
-[]\OT1/cmr/m/n/10 Bonca, J.  (2015a).  \OT1/cmr/m/it/10 Su-doku 9x9-15.  \OT1/
-cmr/m/n/10 Re-trieved 2019-01-13, from
- []
 
-
-Overfull \hbox (15.15527pt too wide) in paragraph at lines 14--26
-\OT1/cmr/m/n/10 https://i.pinimg.com/564x/4c/17/f2/4c17f2454b20fa3200882047d172
-2684.jpg
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 14--26
+Underfull \hbox (badness 10000) in paragraph at lines 132--134
 
  []
 
-[3]) [4] (samplepaper.aux) ) 
+[3]
+Overfull \hbox (0.82054pt too wide) in paragraph at lines 135--137
+\OT1/cmr/m/n/10 nakljucno stevilo tock med 0 in 20. S tem pro-gramu omogoci
+mo vecjo di-namicnost
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 135--137
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 138--140
+
+ []
+
+
+Overfull \hbox (36.88037pt too wide) in paragraph at lines 143--144
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (12.88013pt too wide) in paragraph at lines 145--146
+[][][][][][][][][][][][][][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 147--149
+
+ []
+
+
+Overfull \hbox (72.88074pt too wide) in paragraph at lines 153--154
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (10.09944pt too wide) in paragraph at lines 160--162
+\OT1/cmr/m/n/10 Funkcija za vsako polje Man-hat-tanske raz-dalje pristeje 100 
+tock sahovnici. Podobno
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 160--162
+
+ []
+
+[4] [5]
+Overfull \hbox (36.88037pt too wide) in paragraph at lines 211--212
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (12.88013pt too wide) in paragraph at lines 213--216
+[][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (72.88074pt too wide) in paragraph at lines 217--218
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (54.88055pt too wide) in paragraph at lines 241--242
+[][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (6.88007pt too wide) in paragraph at lines 243--244
+[][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [6]
+Overfull \hbox (270.88275pt too wide) in paragraph at lines 257--258
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (24.88025pt too wide) in paragraph at lines 291--292
+[][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (72.88074pt too wide) in paragraph at lines 292--293
+[][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (12.88013pt too wide) in paragraph at lines 293--295
+[][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [7]
+Overfull \hbox (36.88037pt too wide) in paragraph at lines 301--304
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+(samplepaper.bbl) [8] (samplepaper.aux) ) 
 Here is how much of TeX's memory you used:
- 3963 strings out of 492970
- 53177 string characters out of 3135842
- 144224 words of memory out of 3000000
- 7809 multiletter control sequences out of 15000+200000
+ 3958 strings out of 492970
+ 53123 string characters out of 3135842
+ 149885 words of memory out of 3000000
+ 7804 multiletter control sequences out of 15000+200000
  6278 words of font info for 23 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,5n,32p,837b,1518s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/ams
-fonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
-/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx9.p
-fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/P
-rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Fi
-les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files/MiKTeX
- 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fon
-ts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
-/public/amsfonts/cm/cmtt9.pfb>
-Output written on samplepaper.pdf (4 pages, 127750 bytes).
+ 41i,6n,32p,837b,1569s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files/MiKTeX 2.9/fonts/typ
+e1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
+c/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
+ts/cm/cmbx9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmm
+i10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><
+C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program
+ Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/M
+iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files/MiKTeX 2.
+9/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
+Output written on samplepaper.pdf (8 pages, 146056 bytes).
 PDF statistics:
- 51 PDF objects out of 1000 (max. 8388607)
+ 65 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
