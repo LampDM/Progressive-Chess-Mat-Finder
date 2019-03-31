@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.12.18)  31 MAR 2019 10:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.12.18)  31 MAR 2019 22:31
 entering extended mode
 **./samplepaper.tex
 (samplepaper.tex
@@ -192,34 +192,69 @@ File: listings.cfg 2019/02/27 1.8b listings configuration
 ))
 Package: listings 2019/02/27 1.8b (Carsten Heinz)
 
-(samplepaper.aux)
+("C:\Program Files\MiKTeX 2.9\tex\latex\xcolor\xcolor.sty"
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics-cfg\color.cfg"
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\colortbl\colortbl.sty"
+Package: colortbl 2018/12/12 v1.0d Color table columns (DPC)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\tools\array.sty"
+Package: array 2018/04/30 v2.4h Tabular extension package (FMi)
+\col@sep=\dimen131
+\ar@mcellbox=\box58
+\extrarowheight=\dimen132
+\NC@list=\toks22
+\extratabsurround=\skip50
+\backup@length=\skip51
+\ar@cellbox=\box59
+)
+\everycr=\toks23
+\minrowclearance=\skip52
+)
+\rownum=\count127
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+) (samplepaper.aux)
 \openout1 = `samplepaper.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
- ("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+
+("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count127
-\scratchdimen=\dimen131
-\scratchbox=\box58
-\nofMPsegments=\count128
-\nofMParguments=\count129
-\everyMPshowfont=\toks22
-\MPscratchCnt=\count130
-\MPscratchDim=\dimen132
-\MPnumerator=\count131
-\makeMPintoPDFobject=\count132
-\everyMPtoPDFconversion=\toks23
+\scratchcounter=\count128
+\scratchdimen=\dimen133
+\scratchbox=\box60
+\nofMPsegments=\count129
+\nofMParguments=\count130
+\everyMPshowfont=\toks24
+\MPscratchCnt=\count131
+\MPscratchDim=\dimen134
+\MPnumerator=\count132
+\makeMPintoPDFobject=\count133
+\everyMPtoPDFconversion=\toks25
 ) ("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty"
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -272,191 +307,201 @@ Package grfext Info: Graphics extension search list:
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
 )
-\c@maskedRefs=\count133
+\c@maskedRefs=\count134
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\apacite\english.apc"
 File: english.apc 2013/07/21 v6.03 apacite language file
 LaTeX Info: Redefining \BPBI on input line 129.
 LaTeX Info: Redefining \BHBI on input line 130.
 )
-\c@lstlisting=\count134
+\c@lstlisting=\count135
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 19.
+(Font)              <7> on input line 20.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 19.
+(Font)              <5> on input line 20.
 
-Overfull \hbox (3.73836pt too wide) in paragraph at lines 28--30
+Overfull \hbox (3.73836pt too wide) in paragraph at lines 29--31
 \OT1/cmr/m/n/10 zvezda) v na-men iskanja potez, ki vodijo do sah mata pri dani
  postavitvi sahovskih
  []
 
 
-Overfull \hbox (54.88055pt too wide) in paragraph at lines 55--56
+Overfull \hbox (54.88055pt too wide) in paragraph at lines 56--57
 [][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (6.88007pt too wide) in paragraph at lines 57--58
+Overfull \hbox (6.88007pt too wide) in paragraph at lines 58--59
 [][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 [1
 
 {C:/Users/Uporabnik/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-Overfull \hbox (18.88019pt too wide) in paragraph at lines 74--75
+Overfull \hbox (18.88019pt too wide) in paragraph at lines 75--76
 [][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 76.
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 77.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\omlcmr.fd"
 File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 76.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 77.
  [2]
-Overfull \hbox (24.88025pt too wide) in paragraph at lines 115--116
+Overfull \hbox (24.88025pt too wide) in paragraph at lines 116--117
 [][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (120.88123pt too wide) in paragraph at lines 116--117
+Overfull \hbox (120.88123pt too wide) in paragraph at lines 117--118
 [][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (12.88013pt too wide) in paragraph at lines 117--119
+Overfull \hbox (12.88013pt too wide) in paragraph at lines 118--120
 [][][][][][][][][][][][][][][][][][] 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 120.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 121.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 120.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 121.
 
-Overfull \hbox (36.88037pt too wide) in paragraph at lines 125--126
+Overfull \hbox (36.88037pt too wide) in paragraph at lines 126--127
 [][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 132--134
+Underfull \hbox (badness 10000) in paragraph at lines 133--135
 
  []
 
 [3]
-Overfull \hbox (0.82054pt too wide) in paragraph at lines 135--137
+Overfull \hbox (0.82054pt too wide) in paragraph at lines 136--138
 \OT1/cmr/m/n/10 nakljucno stevilo tock med 0 in 20. S tem pro-gramu omogoci
 mo vecjo di-namicnost
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 135--137
+Underfull \hbox (badness 10000) in paragraph at lines 136--138
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 138--140
+Underfull \hbox (badness 10000) in paragraph at lines 139--141
 
  []
 
 
-Overfull \hbox (36.88037pt too wide) in paragraph at lines 143--144
+Overfull \hbox (36.88037pt too wide) in paragraph at lines 144--145
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (12.88013pt too wide) in paragraph at lines 145--146
+Overfull \hbox (12.88013pt too wide) in paragraph at lines 146--147
 [][][][][][][][][][][][][][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 147--149
+Underfull \hbox (badness 10000) in paragraph at lines 148--150
 
  []
 
 
-Overfull \hbox (72.88074pt too wide) in paragraph at lines 153--154
+Overfull \hbox (72.88074pt too wide) in paragraph at lines 154--155
 [][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (10.09944pt too wide) in paragraph at lines 160--162
+Overfull \hbox (10.09944pt too wide) in paragraph at lines 161--163
 \OT1/cmr/m/n/10 Funkcija za vsako polje Man-hat-tanske raz-dalje pristeje 100 
 tock sahovnici. Podobno
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 160--162
+Underfull \hbox (badness 10000) in paragraph at lines 161--163
 
  []
 
-[4] [5]
-Overfull \hbox (36.88037pt too wide) in paragraph at lines 211--212
+[4]
+Overfull \hbox (28.33229pt too wide) in paragraph at lines 175--188
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 175--188
+
+ []
+
+
+Underfull \vbox (badness 1546) has occurred while \output is active []
+
+ [5]
+Overfull \hbox (36.88037pt too wide) in paragraph at lines 222--223
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (12.88013pt too wide) in paragraph at lines 213--216
+Overfull \hbox (12.88013pt too wide) in paragraph at lines 224--227
 [][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (72.88074pt too wide) in paragraph at lines 217--218
+Overfull \hbox (72.88074pt too wide) in paragraph at lines 228--229
 [][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-
-Overfull \hbox (54.88055pt too wide) in paragraph at lines 241--242
+[6]
+Overfull \hbox (54.88055pt too wide) in paragraph at lines 252--253
 [][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (6.88007pt too wide) in paragraph at lines 243--244
+Overfull \hbox (6.88007pt too wide) in paragraph at lines 254--255
 [][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [6]
-Overfull \hbox (270.88275pt too wide) in paragraph at lines 257--258
+Overfull \hbox (270.88275pt too wide) in paragraph at lines 268--269
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (24.88025pt too wide) in paragraph at lines 291--292
-[][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (72.88074pt too wide) in paragraph at lines 292--293
-[][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (12.88013pt too wide) in paragraph at lines 293--295
-[][][][][][][][][][][][][][][][][][] 
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [7]
-Overfull \hbox (36.88037pt too wide) in paragraph at lines 301--304
+Overfull \hbox (24.88025pt too wide) in paragraph at lines 302--303
+[][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (72.88074pt too wide) in paragraph at lines 303--304
+[][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (12.88013pt too wide) in paragraph at lines 304--306
+[][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (36.88037pt too wide) in paragraph at lines 312--315
 [][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 (samplepaper.bbl) [8] (samplepaper.aux) ) 
 Here is how much of TeX's memory you used:
- 3958 strings out of 492970
- 53123 string characters out of 3135842
- 149885 words of memory out of 3000000
- 7804 multiletter control sequences out of 15000+200000
+ 4528 strings out of 492970
+ 59673 string characters out of 3135842
+ 162410 words of memory out of 3000000
+ 8362 multiletter control sequences out of 15000+200000
  6278 words of font info for 23 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,6n,32p,837b,1569s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 41i,9n,40p,837b,1577s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/fonts/typ
 e1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
 c/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
@@ -466,7 +511,7 @@ C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program
  Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/M
 iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files/MiKTeX 2.
 9/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on samplepaper.pdf (8 pages, 146056 bytes).
+Output written on samplepaper.pdf (8 pages, 147601 bytes).
 PDF statistics:
  65 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
