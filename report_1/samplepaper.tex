@@ -83,7 +83,8 @@ Funkcija \textit{BFS\_move} prejme kot argumenta \textit{brd} (board razred Pyth
                 current[3].pop()
                 continue
 \end{lstlisting}
-Z zgornjo zanko nato pregledamo zalogo vseh dovoljenih potez in marsikatero že na osnovi osnovnih pravil 1-2-3 šaha izločimo. Potezo porinemo na sklad potez izbrane šahovnice in s pomočjo funkcije \textit{was\_into\_check()} preverimo ali je bil kralj napaden pred zadnjo potezo in ali smo prišli do zadnje poteze brez, da bi napadli kralja. V obeh primerih se poteza odstrani iz sklada ter zanka vrne na začetek. Potezo prav tako preskočimo, če s pomočjo množice \textit{visited} ugotovimo, da smo šahovnico že obiskali pri danem številu potez. Bistvene izboljšave na tem področju:
+Z zgornjo zanko nato pregledamo zalogo vseh dovoljenih potez in marsikatero že na osnovi osnovnih pravil 1-2-3 šaha izločimo. Potezo porinemo na sklad potez izbrane šahovnice in s pomočjo funkcije \textit{was\_into\_check()} preverimo ali je bil kralj napaden pred zadnjo potezo in ali smo prišli do zadnje poteze brez, da bi napadli kralja. V obeh primerih se poteza odstrani iz sklada ter zanka vrne na začetek. Potezo prav tako preskočimo, če s pomočjo množice \textit{visited} ugotovimo, da smo šahovnico že obiskali pri danem številu potez. \\
+ Bistvene izboljšave na tem področju:
 \begin{itemize}
   \item Najprej smo za vsako novo potezo naredili kopijo šahovnice in na njej izvajali preverjanja kar se je izkazalo kot zelo potratno, saj je kopiranje celotne instance razreda počasna operacija. Boljša alternativa je bila posamezne poteze preprosto poriniti na sklad že obstoječe instance.
   \item Smiselno bi bilo, da bi takoj preverili ali smo šahovnico že videli, ampak je v praksi operacija zgoščevanja izjemno počasna. Izkazalo se je da je veliko hitrejše poteze najprej izločiti glede na pravila igre kot pa za vsako potezo računati zgoščevalno funkcijo.
@@ -104,7 +105,7 @@ Z zgornjo zanko nato pregledamo zalogo vseh dovoljenih potez in marsikatero že 
                 rand = random.randint(1, 20)
                 r += rand
 
-            # Reward last turn attacks on the king
+            # Reward last turn
             if sc == 1:
                 r -= 1000
 
@@ -123,10 +124,23 @@ Z zgornjo zanko nato pregledamo zalogo vseh dovoljenih potez in marsikatero že 
 
             heapq.heappush(nextq, (r, sc - 1, id(ccopy), ccopy))
 \end{lstlisting}
+Spremenljivka \textit{r} hrani točke pri ocenjevanju nove šahovnice. Nad njo se izvede vrsta preverjanj, ki tej spremenijo vrednost in na koncu se v min kopico pošlje terka z vsoto vseh ocen.
 
 \section{Hevristike}
 
+\subsection{Promocije}
+Promocije figur, ki so bistven del igre 1-2-3 šaha se nagrajuje z -200 točkami. Iz izkušenj igranja 1-2-3 šaha vem, da sta najpogostejši figuri pri promocijah kraljica in trdnjava. Zato zanju program prejme dodatnih -300 in -200 točk.
+\subsection{Naključnost}
+Če čas izvajanja programa preseže 17 sekund se vsaki novi šahovnici doda naključno število točk med 0 in 20. S tem programu omogočimo večjo dinamičnost pri izbiri naslednje šahovnice in nam naključna srečna izbira lahko drastično izboljša rezultate.
+\subsection{Nagrajevanje dosega končne poteze}
+Izkazalo se je, da je najboljše program prisiliti k takojšnjemu pregledu šahovnic, ki nimajo 
+\subsection{Pokritost polj kralja}
+\subsection{Manhattan razdalja}
+\subsection{Nagrajevanje globine}
+
 \section{Ovrednotev}
+
+\section{Programska koda}
 
  \bibliographystyle{apacite}
  
